@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import FilterComponent from "../filter/FilterCoponent";
 import axios from "axios";
 import {AccountCircle, Logout, SportsSoccer } from "@mui/icons-material";
-import {IconButton} from "@mui/material";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton} from "@mui/material";
 import ClubCardsComponent from "../filter/ClubCardsComponent";
 
 const DashboardComponent = ()=>{
@@ -69,6 +69,27 @@ const DashboardComponent = ()=>{
         })
     }
 
+    //Create one Dialog for Without Login Access to Dashboard
+    //Manager States and methods for it
+    const[errDialogOpen,setErrDialogOpen] = useState(false);
+    const handleErrDialogOpen = ()=>{
+        setErrDialogOpen(true);
+    }
+    const handleErrDialogClose = ()=>{
+        setErrDialogOpen(false);
+    }
+    const ErrDialog = ()=>{
+        return(
+            <Dialog open={errDialogOpen} onClose={handleErrDialogClose}>
+                <DialogTitle className="font-monospace fw-bolder fs-5 text-white text-bg-danger">Error</DialogTitle>
+                <DialogContent className="mt-3 font-monospace fw-bolder fs-6 text-danger">Login First, then access Dashboard!! Navigating to Login Page wait..</DialogContent>
+                <DialogActions>
+                    <Button onClick={handleErrDialogClose} className="fs-6 font-monoscape fw-bolder" size="small" variant="contained" color="error">Ok</Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
+
     useEffect(()=>{
         //On Component mount first check if cookie with userName name exists or not
         if(cookie["userName"]){
@@ -85,11 +106,14 @@ const DashboardComponent = ()=>{
             //Load all the legends also at first
             loadLegends(`https://spring-react-football.onrender.com/getLegends?nation=all`);
         }else{
-            //cookie is not ther give err msg
-            alert("Login first! then access dashboard!!");
+            //cookie is not ther give err msg in an Error Model
+            handleErrDialogOpen();
 
-            //cookie is not present, so can not allow for dashboard page redirect to login
-            navigate("/home/login");
+            //Give a delay and navigate back to login
+            setTimeout(()=>{
+                //cookie is not present, so can not allow for dashboard page redirect to login
+                navigate("/home/login");
+            },3600)
         }
     },[]);
 
@@ -108,16 +132,38 @@ const DashboardComponent = ()=>{
         loadLegends(`https://spring-react-football.onrender.com/getLegends?nation=${nation}`);
     }
 
+    //Create a Success Dialog that will be displayed on success log out
+    const[dialogOpen,setDialogOpen] = useState(false);
+    const handleDialogOpen = ()=>{
+        setDialogOpen(true);
+    }
+    const handleDialogClose = ()=>{
+        setDialogOpen(false);
+    }
+    const SuccessDialog = ()=>{
+        return(
+            <Dialog open={dialogOpen} onClose={handleDialogClose}>
+                <DialogTitle className="font-monospace fw-bolder fs-5 text-bg-warning">Sign Out</DialogTitle>
+                <DialogContent className="mt-3 font-monospace fw-bolder fs-6 text-danger">Signed Out Successfully...</DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose} className="fs-6 font-monoscape fw-bolder" size="small" variant="contained" color="error">Ok</Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
+
     //on Sign out click remove the existing cookie and logout
     const handleSignOut = ()=>{
         //remove the cookie with "userName" nae
         removeCookie("userName");
 
-        //give an alert msg
-        alert("Signed out successfully... :)");
+        //give an alert msg in the success model
+        handleDialogOpen();
 
-        //navigate back to login page
-        navigate("/home/login");
+        //navigate back to login page after some delay
+        setTimeout(()=>{
+            navigate("/home/login");
+        },1000)
     }
 
     //return the markup or presentation
@@ -139,6 +185,9 @@ const DashboardComponent = ()=>{
                     <ClubCardsComponent clubs={clubs} trophies={trophies} legends={legends}/>
                 </main>
             </section>
+            {/* Give the Dialogs */}
+            <SuccessDialog/>
+            <ErrDialog/>
         </div>
     )
 }

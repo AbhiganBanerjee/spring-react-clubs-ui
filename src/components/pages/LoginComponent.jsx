@@ -1,5 +1,5 @@
 import { DarkMode, HowToReg, LightMode, Login } from "@mui/icons-material";
-import { Card, CardContent, CardHeader, Container, IconButton, TextField, Button } from "@mui/material";
+import { Card, CardContent, CardHeader, Container, IconButton, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
@@ -12,6 +12,48 @@ const LoginComponent = ()=>{
 
     //Create a cookie reference to assign cookie for successfull login
     const[cookies,setCookies,removeCookie] = useCookies();
+
+    //Create one Dialog for LoginErr
+    //Manager States and methods for it
+    const[errDialogOpen,setErrDialogOpen] = useState(false);
+    const handleErrDialogOpen = ()=>{
+        setErrDialogOpen(true);
+    }
+    const handleErrDialogClose = ()=>{
+        setErrDialogOpen(false);
+    }
+    const ErrDialog = ()=>{
+        return(
+            <Dialog open={errDialogOpen} onClose={handleErrDialogClose}>
+                <DialogTitle className="font-monospace fw-bolder fs-5 text-white text-bg-danger">Error</DialogTitle>
+                <DialogContent className="mt-3 font-monospace fw-bolder fs-6 text-danger">Login Failed!!!</DialogContent>
+                <DialogActions>
+                    <Button onClick={handleErrDialogClose} className="fs-6 font-monoscape fw-bolder" size="small" variant="contained" color="error">Ok</Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
+
+    //Similarly create a Success Dialog that will be displayed on success login
+    const[dialogOpen,setDialogOpen] = useState(false);
+    const handleDialogOpen = ()=>{
+        setDialogOpen(true);
+    }
+    const handleDialogClose = ()=>{
+        setDialogOpen(false);
+    }
+    const SuccessDialog = ()=>{
+        return(
+            <Dialog open={dialogOpen} onClose={handleDialogClose}>
+                <DialogTitle className="font-monospace fw-bolder fs-5 text-white text-bg-success">Success</DialogTitle>
+                <DialogContent className="mt-3 font-monospace fw-bolder fs-6 text-danger">Login Success...</DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose} className="fs-6 font-monoscape fw-bolder" size="small" variant="contained" color="success">Ok</Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
+
 
     //Create a formik reference to handle form info
     const formik = useFormik({
@@ -33,20 +75,25 @@ const LoginComponent = ()=>{
                     //set up the cookie
                     setCookies("userName",user.userName);
 
-                    //give success message
-                    alert("Login Success.. :)");
+                    //give success message in the success modal
+                    handleDialogOpen();
 
-                    //navigate to Dashboard page
-                    navigate("/dashboard");
+                    //after some delay navigate to Dashboard page
+                    setTimeout(()=>{
+                        navigate("/dashboard");//some time later it will be navigated
+                    },1000)
+
                     break;
                 }
             }
             if(!flag){
-                //failed message
-                alert("Login Failed!! :(");
+                //failed message show in modal
+                handleErrDialogOpen();
 
-                //navigate to error page
-                navigate("/loginErr");
+                //after some time redirect to error page
+                setTimeout(() => {
+                    navigate("/loginErr");
+                }, 1000);
             }
         }
     });
@@ -190,7 +237,10 @@ const LoginComponent = ()=>{
                         </form>
                     </CardContent>
                 </Card>
-            </Container>
+                {/* Give the Modals */}
+                <SuccessDialog/>
+                <ErrDialog/>
+            </Container>       
         </div>
     );
 }
