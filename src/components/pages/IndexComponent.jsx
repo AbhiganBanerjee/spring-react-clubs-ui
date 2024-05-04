@@ -18,9 +18,9 @@ const IndexComponent = ()=>{
         //on component mount set the styles
         setMyStyle(
             {
-                backgroundImage: `url(/b5.jpg)`,
-                backgroundSize: "contain",
-                minHeight: "100vmax",    /*Viewport max height it will expand automatically if required*/
+                // backgroundImage: `url(/b5.jpg)`,
+                // backgroundSize: "contain",
+                // minHeight: "100vmax",    /*Viewport max height it will expand automatically if required*/
                 color: "white"
             }
         );
