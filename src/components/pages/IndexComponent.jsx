@@ -21,7 +21,7 @@ const IndexComponent = ()=>{
                 // backgroundImage: `url(/b5.jpg)`,
                 // backgroundSize: "contain",
                 // minHeight: "100vmax",    /*Viewport max height it will expand automatically if required*/
-                color: "white"
+                color: "red"
             }
         );
     },[])
