@@ -88,7 +88,7 @@ const RegisterComponent = ()=>{
     },[])
 
     return(
-        <div className="container-fluid d-flex justify-content-center">
+        <div className="container-fluid d-flex justify-content-center mt-5">
             {/* Start the Login Form creation in a container */}
             <Container component="main" maxWidth="sm">
                 {/* Create a Card which will hold the Login Form */}
