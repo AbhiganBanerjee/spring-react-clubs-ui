@@ -38,17 +38,13 @@ const IndexComponent = ()=>{
             {/* Define Browser Router and Home, Dashboard Routing */}
             <BrowserRouter>
                 <section className='row'>
-                    <nav className='col-3 d-flex navbar navbar-expand-lg navbar-light ' style={{backgroundColor:"inherit"}}>
-                        <div className="collapse navbar-collapse">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="nav-item active" style={{marginLeft:"20px"}}>
-                                    <Link className='text-decoration-none text-white fw-bold fs-4' to="/home">Home</Link>
-                                </li>
-                                <li className="nav-item active" style={{marginLeft:"55px"}}>
-                                    <Link className='text-decoration-none text-white fw-bold fs-4'  to="/dashboard">Dashboard</Link>
-                                </li>
-                            </ul>
+                    <nav className='col-3 d-flex' style={{backgroundColor:"inherit"}}>
+                        <div className="mt-2 d-flex" style={{marginLeft:"10px"}}>
+                            <Link className='text-decoration-none text-danger fw-bold fs-4' to="/home">Home</Link>
                         </div>
+                        <div className="mt-2 d-flex" style={{marginLeft:"40px"}}>
+                            <Link className='text-decoration-none text-danger fw-bold fs-4'  to="/dashboard">Dashboard</Link>
+                        </div>   
                     </nav>
                     <main className='mt-2 mb-2 col-12'>
                         {/* Define the Routes Here */}
