@@ -170,7 +170,7 @@ const DashboardComponent = ()=>{
     return(
         <div className="container-fluid">
             <header className="text-center" style={{border:"3px solid white"}}>
-                <h3 className="fw-bold font-monospace"><SportsSoccer/> Football Clubs Dashboard Page dashboard<br/>
+                <h3 className="fw-bold font-monospace text-white"><SportsSoccer/> Football Clubs Dashboard Page dashboard<br/>
                     <div className="text-center">
                         <AccountCircle/><b className="fs-6">{user} &nbsp; | &nbsp; Sign Out<IconButton onClick={handleSignOut} size="small" color="inherit"><Logout/></IconButton></b> 
                     </div>

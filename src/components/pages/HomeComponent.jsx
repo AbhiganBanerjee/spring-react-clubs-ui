@@ -10,7 +10,7 @@ const HomeComponent = ()=>{
     return(
         <div className="container-fluid">
             <header className="text-center" style={{border:"4px solid white"}}>
-                <h3 className="font-monospacem fw-bold"> <Home/> Welcome to Home Page</h3>
+                <h3 className="font-monospacem fw-bold text-white"> <Home/> Welcome to Home Page</h3>
             </header>
             <section className="row">
                 <nav className='col-3 d-flex' style={{backgroundColor:"inherit"}}>

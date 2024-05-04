@@ -18,9 +18,9 @@ const IndexComponent = ()=>{
         //on component mount set the styles
         setMyStyle(
             {
-                // backgroundImage: `url(/b5.jpg)`,
-                // backgroundSize: "contain",
-                // minHeight: "100vmax",    /*Viewport max height it will expand automatically if required*/
+                backgroundImage: `url(/b5.jpg)`,
+                backgroundSize: "contain",
+                minHeight: "70vmax",    /*Viewport max height it will expand automatically if required*/
                 color: "red"
             }
         );
@@ -32,7 +32,7 @@ const IndexComponent = ()=>{
             style={myStyle} 
             //Binding the style in this component
         >
-            <header className='text-center'>
+            <header className='text-center text-white'>
                 <h1 className='fw-bold fst-italic'><Sports fontSize='250px'/> Welcome to World Football Exploration Page</h1>
             </header>
             {/* Define Browser Router and Home, Dashboard Routing */}
@@ -40,10 +40,10 @@ const IndexComponent = ()=>{
                 <section className='row'>
                     <nav className='col-3 d-flex' style={{backgroundColor:"inherit"}}>
                         <div className="mt-2 d-flex" style={{marginLeft:"10px"}}>
-                            <Link className='text-decoration-none text-danger fw-bold fs-4' to="/home">Home</Link>
+                            <Link className='text-decoration-none text-white fw-bold fs-4' to="/home">Home</Link>
                         </div>
                         <div className="mt-2 d-flex" style={{marginLeft:"40px"}}>
-                            <Link className='text-decoration-none text-danger fw-bold fs-4'  to="/dashboard">Dashboard</Link>
+                            <Link className='text-decoration-none text-white fw-bold fs-4'  to="/dashboard">Dashboard</Link>
                         </div>   
                     </nav>
                     <main className='mt-2 mb-2 col-12'>
