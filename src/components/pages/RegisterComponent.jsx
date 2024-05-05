@@ -1,5 +1,5 @@
 import { DarkMode, HowToReg, LightMode } from "@mui/icons-material";
-import { Card, CardContent, CardHeader, Container, IconButton, colors, TextField, Button } from "@mui/material";
+import { Card, CardContent, CardHeader, Container, IconButton, colors, TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
@@ -9,6 +9,47 @@ const RegisterComponent = ()=>{
 
     //Create a navigate reference to nagigate between pages
     const navigate = useNavigate();
+
+    //Create one Dialog for RegisterErr
+    //Manager States and methods for it
+    const[errDialogOpen,setErrDialogOpen] = useState(false);
+    const handleErrDialogOpen = ()=>{
+        setErrDialogOpen(true);
+    }
+    const handleErrDialogClose = ()=>{
+        setErrDialogOpen(false);
+    }
+    const ErrDialog = ()=>{
+        return(
+            <Dialog open={errDialogOpen} onClose={handleErrDialogClose}>
+                <DialogTitle className="font-monospace fw-bolder fs-5 text-white text-bg-danger">Error</DialogTitle>
+                <DialogContent className="mt-3 font-monospace fw-bolder fs-6 text-danger">Registration Failed!!!</DialogContent>
+                <DialogActions>
+                    <Button onClick={handleErrDialogClose} className="fs-6 font-monoscape fw-bolder" size="small" variant="contained" color="error">Ok</Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
+
+    //Similarly create a Success Dialog that will be displayed on success Register
+    const[dialogOpen,setDialogOpen] = useState(false);
+    const handleDialogOpen = ()=>{
+        setDialogOpen(true);
+    }
+    const handleDialogClose = ()=>{
+        setDialogOpen(false);
+    }
+    const SuccessDialog = ()=>{
+        return(
+            <Dialog open={dialogOpen} onClose={handleDialogClose}>
+                <DialogTitle className="font-monospace fw-bolder fs-5 text-white text-bg-success">Success</DialogTitle>
+                <DialogContent className="mt-3 font-monospace fw-bolder fs-6 text-danger">Registration Success...Navigating to Login Page..</DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDialogClose} className="fs-6 font-monoscape fw-bolder" size="small" variant="contained" color="success">Ok</Button>
+                </DialogActions>
+            </Dialog>
+        )
+    }
 
     //Create a formik reference to handle form info
     const formik = useFormik({
@@ -24,17 +65,25 @@ const RegisterComponent = ()=>{
             axios.post(`https://spring-react-football.onrender.com/addUser`,values)
             .then((res)=>{
                 console.log(res.data);
-                alert(res.data);
+                //Show success msg in modal
+                handleDialogOpen();
 
-                //Success registration, so navigate to Login page
-                navigate("/home/login");
+                //Give a delay
+                setTimeout(()=>{
+                    //Success registration, so navigate to Login page
+                    navigate("/home/login");
+                },2000)
             })
             .catch((err)=>{
                 console.log(err);
-                alert(err);
+                //Give error msg in a modal
+                handleErrDialogOpen();
 
-                //registration failed so navigate to registration error page
-                navigate("/regErrPage");
+                //give a delay and navigate
+                setTimeout(()=>{
+                    //registration failed so navigate to registration error page
+                    navigate("/regErrPage");
+                },2000)
             })
         }
     });
@@ -212,6 +261,9 @@ const RegisterComponent = ()=>{
                         </form>
                     </CardContent>
                 </Card>
+                {/* Define the Modals */}
+                <SuccessDialog/>
+                <ErrDialog/>
             </Container>
         </div>
     );
