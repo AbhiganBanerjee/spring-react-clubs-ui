@@ -44,9 +44,9 @@ const ClubCardsComponent = ({clubs, trophies, legends})=>{
                 {/* For each club create a card */}
                 {
                     clubs.map((club,index) => 
-                        <Card  elevation={8} style={myStyle} className="mt-2" key={club._id}>
+                        <Card id="card" elevation={8} style={myStyle} className="mt-2" key={club._id}>
                             {/* Create the CardHeader */}
-                            <CardHeader 
+                            <CardHeader className="card-header"
                                 avatar={
                                     <Avatar style={{border:!isTheme?"2px solid white" : "2px solid #063C18"}} src={club.legLogo} />
                                 }
@@ -60,7 +60,7 @@ const ClubCardsComponent = ({clubs, trophies, legends})=>{
                                 }
                             />
                             {/* Make the Card Body */}
-                            <CardContent className="card-body font-monospace">
+                            <CardContent className="card-content">
                                 <dl>
                                     {/* Print the trophies */}
                                     <dt><EmojiEvents/> Trophies:</dt>
@@ -85,6 +85,7 @@ const ClubCardsComponent = ({clubs, trophies, legends})=>{
                                 </dl>
                                 {/* Put the Image of the Club */}
                                 <CardMedia
+                                    className="card-media"
                                     component="img"
                                     image={club.image}
                                     height={300}

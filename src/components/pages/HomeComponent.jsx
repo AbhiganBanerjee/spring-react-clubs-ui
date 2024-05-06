@@ -21,7 +21,7 @@ const HomeComponent = ()=>{
                     <Link className='text-decoration-none text-white fw-bold fs-5' to="register"><Button size="small" variant="contained" color="success" className="font-monospace fw-bold text-white">Register&nbsp;<HowToReg/></Button></Link>
                     </div>
                 </nav>
-                <main className="col-10 d-flex justify-content-center align-items-center" style={{height:"460px", marginLeft:"145px"}}>
+                <main className="d-flex justify-content-center align-items-center" style={{height:"460px"}}>
                     <Outlet/>
                 </main>
             </section>   

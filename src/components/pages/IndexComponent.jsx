@@ -20,7 +20,7 @@ const IndexComponent = ()=>{
             {
                 backgroundImage: `url(/b5.jpg)`,
                 backgroundSize: "contain",
-                minHeight: "90vmax",    /*Viewport max height it will expand automatically if required*/
+                minHeight: "130vmax",    /*Viewport max height it will expand automatically if required*/
                 color: "white"
             }
         );

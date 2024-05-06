@@ -8,6 +8,7 @@ import axios from "axios";
 import {AccountCircle, Logout, SportsSoccer } from "@mui/icons-material";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton} from "@mui/material";
 import ClubCardsComponent from "../filter/ClubCardsComponent";
+import ResponsiveCards from "../filter/ResponsiveCards";
 
 const DashboardComponent = ()=>{
     //create a cookie reference to check for existing cookies
@@ -182,7 +183,8 @@ const DashboardComponent = ()=>{
                     <FilterComponent onChange={handleFilterChange}/>
                 </nav>
                 <main className="mt-2">
-                    <ClubCardsComponent clubs={clubs} trophies={trophies} legends={legends}/>
+                    {/* <ClubCardsComponent clubs={clubs} trophies={trophies} legends={legends}/> */}
+                    <ResponsiveCards clubs={clubs} trophies={trophies} legends={legends}/>
                 </main>
             </section>
             {/* Give the Dialogs */}
