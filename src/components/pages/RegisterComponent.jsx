@@ -99,6 +99,7 @@ const RegisterComponent = ()=>{
             backgroundColor : !isTheme ? "white" : "#063C18",
             color : !isTheme ? "#063C18" : "white",
             border: isTheme ? "3px solid white" : "3px solid #063C18",
+            marginTop:"100px"
         })
     }
 
